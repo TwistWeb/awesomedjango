@@ -15,13 +15,8 @@ jobs:
       - name: Build AND push the Docker Image
         run: |
           IMAGE_NAME="awesomepayne/awesomedjango"
-          GIT_VERSION=`git describe --always --tag`
+#          GIT_VERSION=`git describe --always --tag`
+          GIT_VERSION=`echo "$(date +%Y%m%d%H%m%s)"`
           REPOSITORY=docker.io/${IMAGE_NAME}:${GIT_VERSION}
           docker build -t $REPOSITORY -f Deploy/Dockerfile .
           docker push $REPOSITORY
-#          regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
-#          if [[ $tag =~ $regex ]]; then
-#            echo "Build Stable Version '$tag'"
-#            docker tag awesomepayne/awesomedjango:$tag awesomepayne/awesomedjango:latest
-#            docker push awesomepayne/awesomedjango:latest
-#          fi
