@@ -16,11 +16,11 @@ jobs:
       run: |
         tag=${GITHUB_REF:11}
         echo "Build Tag '$tag'"
-        docker build -t germey/awesomedjango:$tag -f ./docker/Dockerfile .
-        docker push germey/awesomedjango:$tag
+        docker build -t awesomepayne/awesomedjango:$tag -f ./docker/Dockerfile .
+        docker push awesomepayne/awesomedjango:$tag
         regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
         if [[ $tag =~ $regex ]]; then
           echo "Build Stable Version '$tag'"
-          docker tag germey/awesomedjango:$tag germey/awesomedjango:latest
-          docker push germey/awesomedjango:latest
+          docker tag awesomepayne/awesomedjango:$tag awesomepayne/awesomedjango:latest
+          docker push awesomepayne/awesomedjango:latest
         fi
