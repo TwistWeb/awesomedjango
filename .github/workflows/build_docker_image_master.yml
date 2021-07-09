@@ -17,4 +17,4 @@ jobs:
         tags=${date +%Y%m%d%H%m%s}
         docker build -t awesomepayne/awesomedjango:$tags -f Deploy/Dockerfile .
     - name: Push the Docker Image
-      run: docker push awesomepayne/awesomedjango:master
+      run: docker push awesomepayne/awesomedjango:$tags
