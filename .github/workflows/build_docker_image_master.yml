@@ -15,7 +15,7 @@ jobs:
       - name: Build AND push the Docker Image
         run: |
           IMAGE_NAME="awesomepayne/awesomedjango"
-          GIT_VERSION=echo "$(date +%Y%m%d%H%m%s)"
+          GIT_VERSION=echo "$(date +%Y%m%d%H%m%s)" | awk '{print $1}'
           REPOSITORY=docker.io/${IMAGE_NAME}:${GIT_VERSION}
           docker build -t $REPOSITORY -f Deploy/Dockerfile .
           docker push $REPOSITORY
