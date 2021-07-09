@@ -15,8 +15,8 @@ jobs:
       - name: Build AND push the Docker Image
         run: |
           tag="$(date +%Y%m%d%H%m%s)"
-          echo "Build Tag '$tag'"
-          docker build -t awesomepayne/awesomedjango:$tag -f ./docker/Dockerfile .
+          echo "Build Tag '${tag}'"
+          docker build -t awesomepayne/awesomedjango:${tag} -f ./docker/Dockerfile .
           docker push awesomepayne/awesomedjango:$tag
           regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
           if [[ $tag =~ $regex ]]; then
