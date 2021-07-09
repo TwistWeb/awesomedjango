@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from environs import Env
 import pymysql
 
 pymysql.install_as_MySQLdb()
+
+# Environment configuration
+env = Env()
+env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,12 +85,13 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'NAME': 'django_project_db',
-        'USER': 'root',
-        'PASSWORD': 'HcdhMySQL123',
+        # 'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': env.str('ENGINE', 'django.db.backends.mysql'),
+        'HOST': env.str('HOST', '127.0.0.1'),
+        'PORT': env.str('PORT', '3306'),
+        'NAME': env.str('NAME', 'django_project_db'),
+        'USER': env.str('USER', 'root'),
+        'PASSWORD': env.str('PASSWORD', 'HcdhMySQL123'),
     }
 }
 
