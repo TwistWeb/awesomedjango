@@ -12,9 +12,15 @@ jobs:
       uses: actions/checkout@v1
     - name: Docker Login
       run: docker login -u awesomepayne -p wzp071912
-    - name: Build the Docker Image
+    - name: Build AND push the Docker Image
       run: |
-        tags=${date +%Y%m%d%H%m%s}
-        docker build -t awesomepayne/awesomedjango:$tags -f Deploy/Dockerfile .
-    - name: Push the Docker Image
-      run: docker push awesomepayne/awesomedjango:$tags
+        tag=${GITHUB_REF:11}
+        echo "Build Tag '$tag'"
+        docker build -t awesomedjango/gerapy:$tag -f ./docker/Dockerfile .
+        docker push awesomedjango/gerapy:$tag
+        regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
+        if [[ $tag =~ $regex ]]; then
+          echo "Build Stable Version '$tag'"
+          docker tag awesomedjango/gerapy:$tag awesomedjango/gerapy:latest
+          docker push awesomedjango/gerapy:latest
+        fi
