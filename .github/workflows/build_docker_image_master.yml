@@ -14,7 +14,7 @@ jobs:
         run: docker login -u awesomepayne -p wzp071912
       - name: Build AND push the Docker Image
         run: |
-          tag=${date+%Y%m%d%H%m%s}
+          tag="${date+%Y%m%d%H%m%s}"
           echo "Build Tag '$tag'"
           docker build -t awesomepayne/awesomedjango:$tag -f ./docker/Dockerfile .
           docker push awesomepayne/awesomedjango:$tag
