@@ -14,6 +14,7 @@ jobs:
       run: docker login -u awesomepayne -p wzp071912
     - name: Build the Docker Image
       run: |
-        docker build -t awesomepayne/awesomedjango:master -f Deploy/Dockerfile .
+        tags="$(date +%Y%m%d%H%m%s)"
+        docker build -t awesomepayne/awesomedjango:$tags -f Deploy/Dockerfile .
     - name: Push the Docker Image
       run: docker push awesomepayne/awesomedjango:master
