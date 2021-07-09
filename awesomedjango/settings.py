@@ -80,19 +80,19 @@ WSGI_APPLICATION = 'awesomedjango.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        'ENGINE': env.str('ENGINE', 'django.db.backends.mysql'),
-        'HOST': env.str('HOST', '127.0.0.1'),
-        'PORT': env.str('PORT', '3306'),
-        'NAME': env.str('NAME', 'django_project_db'),
-        'USER': env.str('USER', 'root'),
-        'PASSWORD': env.str('PASSWORD', 'HcdhMySQL123'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     # 'ENGINE': 'django.db.backends.mysql',
+    #     'ENGINE': env.str('ENGINE', 'django.db.backends.mysql'),
+    #     'HOST': env.str('HOST', '127.0.0.1'),
+    #     'PORT': env.str('PORT', '3306'),
+    #     'NAME': env.str('NAME', 'django_project_db'),
+    #     'USER': env.str('USER', 'root'),
+    #     'PASSWORD': env.str('PASSWORD', 'HcdhMySQL123'),
+    # }
 }
 
 # Password validation
