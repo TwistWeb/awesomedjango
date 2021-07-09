@@ -2,25 +2,25 @@ name: docker build image master
 on:
   push:
     branches:
-    - master
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Source
-      uses: actions/checkout@v1
-    - name: Docker Login
-      run: docker login -u awesomepayne -p wzp071912
-    - name: Build AND push the Docker Image
-      run: |
-        tag=${GITHUB_REF:11}
-        echo "Build Tag '$tag'"
-        docker build -t awesomepayne/awesomedjango:$tag -f ./docker/Dockerfile .
-        docker push awesomepayne/awesomedjango:$tag
-        regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
-        if [[ $tag =~ $regex ]]; then
-          echo "Build Stable Version '$tag'"
-          docker tag awesomepayne/awesomedjango:$tag awesomepayne/awesomedjango:latest
-          docker push awesomepayne/awesomedjango:latest
-        fi
+      - name: Checkout Source
+        uses: actions/checkout@v1
+      - name: Docker Login
+        run: docker login -u awesomepayne -p wzp071912
+      - name: Build AND push the Docker Image
+        run: |
+          tag=${date+%Y%m%d%H%m%s}
+          echo "Build Tag '$tag'"
+          docker build -t awesomepayne/awesomedjango:$tag -f ./docker/Dockerfile .
+          docker push awesomepayne/awesomedjango:$tag
+          regex='^([0-9]+\.){0,2}(\*|[0-9]+)$'
+          if [[ $tag =~ $regex ]]; then
+            echo "Build Stable Version '$tag'"
+            docker tag awesomepayne/awesomedjango:$tag awesomepayne/awesomedjango:latest
+            docker push awesomepayne/awesomedjango:latest
+          fi
